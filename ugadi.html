@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Ugadi, Rama! 🌿✨</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,600&family=Poppins:wght@300;400;600&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            /* Deep festive gradient */
+            background: radial-gradient(circle at center, #4a0e17 0%, #1a0205 100%);
+            color: #ffffff;
+            font-family: 'Poppins', sans-serif;
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            perspective: 1000px; /* For the 3D effect */
+        }
+
+        /* Pure CSS Toranam (Mango Leaves & Marigolds) */
+        .toranam-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+            padding-top: 5px;
+            z-index: 5;
+        }
+
+        .decoration {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            animation: sway 3s ease-in-out infinite alternate;
+            transform-origin: top center;
+        }
+
+        /* Delay animations so they don't swing identically */
+        .decoration:nth-child(even) { animation-delay: 1.5s; }
+        .decoration:nth-child(3n) { animation-delay: 0.7s; }
+
+        .mango-leaf {
+            width: 30px;
+            height: 80px;
+            background: linear-gradient(135deg, #2e7d32, #1b5e20);
+            border-radius: 0 100% 0 100%;
+            box-shadow: 2px 5px 10px rgba(0,0,0,0.5);
+        }
+
+        .marigold {
+            width: 25px;
+            height: 25px;
+            background: radial-gradient(circle, #ffca28, #ff8f00);
+            border-radius: 50%;
+            margin-top: -10px;
+            box-shadow: 0 0 10px rgba(255, 143, 0, 0.8);
+            border: 2px dashed #e65100;
+        }
+
+        /* Background Petals Canvas */
+        #petalCanvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* Main 3D Glass Card */
+        .card-container {
+            position: relative;
+            z-index: 10;
+            transform-style: preserve-3d;
+            transition: transform 0.1s ease;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            border-radius: 24px;
+            padding: 50px 40px;
+            text-align: center;
+            max-width: 500px;
+            width: 90vw;
+            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.5), 
+                        inset 0 0 20px rgba(255, 215, 0, 0.1);
+            transform: translateZ(50px); /* Pops the content out in 3D */
+        }
+
+        /* Glowing Animated Mandala */
+        .mandala {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 25px auto;
+            position: relative;
+            animation: spin 15s linear infinite;
+        }
+
+        .mandala::before, .mandala::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 3px solid #ffd700;
+            border-radius: 15px;
+            box-shadow: 0 0 20px #ffd700, inset 0 0 20px #ffd700;
+        }
+
+        .mandala::after {
+            transform: rotate(45deg);
+        }
+
+        .mandala-inner {
+            position: absolute;
+            top: 20%;
+            left: 20%;
+            width: 60%;
+            height: 60%;
+            background: radial-gradient(circle, #ff8f00, transparent);
+            border-radius: 50%;
+            animation: pulseGlow 2s ease-in-out infinite alternate;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            color: #ffd700;
+            text-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
+            letter-spacing: 2px;
+        }
+
+        .highlight {
+            color: #ff8f00;
+            font-style: italic;
+        }
+
+        p.message {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #f1f1f1;
+            font-weight: 300;
+        }
+
+        /* Keyframes */
+        @keyframes sway {
+            0% { transform: rotate(-5deg); }
+            100% { transform: rotate(5deg); }
+        }
+
+        @keyframes spin {
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 0 10px #ff8f00; opacity: 0.7; }
+            100% { box-shadow: 0 0 30px #ffd700; opacity: 1; }
+        }
+
+    </style>
+</head>
+<body>
+
+    <canvas id="petalCanvas"></canvas>
+
+    <div class="toranam-container" id="toranam"></div>
+
+    <div class="card-container" id="card3d">
+        <div class="glass-card">
+            <div class="mandala">
+                <div class="mandala-inner"></div>
+            </div>
+            
+            <h1>Happy Ugadi,<br><span class="highlight">Rama!</span></h1>
+            <p class="message">
+                May this Vishwavasu Nama Samvatsara bring as much beauty, light, and sweetness to your life as you bring to mine. Wishing you a year full of endless joy and perfectly balanced flavors! ✨
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // --- 1. Generate Toranam (Leaves & Flowers) ---
+        const toranamContainer = document.getElementById('toranam');
+        const numDecorations = Math.floor(window.innerWidth / 60); // Space them out based on screen width
+        for(let i=0; i<numDecorations; i++) {
+            const dec = document.createElement('div');
+            dec.className = 'decoration';
+            dec.innerHTML = `<div class="mango-leaf"></div><div class="marigold"></div>`;
+            toranamContainer.appendChild(dec);
+        }
+
+        // --- 2. 3D Hover Effect on Card ---
+        const card = document.getElementById('card3d');
+        document.addEventListener('mousemove', (e) => {
+            let xAxis = (window.innerWidth / 2 - e.pageX) / 25;
+            let yAxis = (window.innerHeight / 2 - e.pageY) / 25;
+            card.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+        });
+
+        // Reset to normal when mouse leaves screen
+        document.addEventListener('mouseleave', () => {
+            card.style.transform = `rotateY(0deg) rotateX(0deg)`;
+            card.style.transition = 'transform 0.5s ease'; // Smooth snap back
+        });
+        
+        document.addEventListener('mouseenter', () => {
+            card.style.transition = 'none'; // Remove transition for instant tracking
+        });
+
+        // --- 3. Falling Flower Petals Animation ---
+        const canvas = document.getElementById('petalCanvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const petals = [];
+        
+        class Petal {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height - canvas.height;
+                this.size = Math.random() * 6 + 4;
+                this.speedY = Math.random() * 1.5 + 1;
+                this.speedX = Math.random() * 2 - 1;
+                this.angle = Math.random() * 360;
+                this.spin = Math.random() * 0.2 - 0.1;
+                
+                // Yellow/Orange petal colors
+                const colors = ['#ffb300', '#ffca28', '#ff8f00', '#ffeb3b'];
+                this.color = colors[Math.floor(Math.random() * colors.length)];
+            }
+            
+            update() {
+                this.y += this.speedY;
+                // Add a swaying motion using Math.sin
+                this.x += Math.sin(this.y * 0.01) + this.speedX;
+                this.angle += this.spin;
+
+                if (this.y > canvas.height) {
+                    this.y = -10;
+                    this.x = Math.random() * canvas.width;
+                }
+            }
+            
+            draw() {
+                ctx.save();
+                ctx.translate(this.x, this.y);
+                ctx.rotate(this.angle);
+                
+                // Draw petal shape
+                ctx.beginPath();
+                ctx.fillStyle = this.color;
+                ctx.globalAlpha = 0.8;
+                ctx.ellipse(0, 0, this.size, this.size / 2, 0, 0, Math.PI * 2);
+                ctx.fill();
+                
+                ctx.restore();
+            }
+        }
+
+        for (let i = 0; i < 75; i++) {
+            petals.push(new Petal());
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            petals.forEach(petal => {
+                petal.update();
+                petal.draw();
+            });
+            requestAnimationFrame(animate);
+        }
+        
+        animate();
+
+        // Responsive canvas
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            // Regenerate toranam spacing
+            toranamContainer.innerHTML = '';
+            const newNum = Math.floor(window.innerWidth / 60);
+            for(let i=0; i<newNum; i++) {
+                const dec = document.createElement('div');
+                dec.className = 'decoration';
+                dec.innerHTML = `<div class="mango-leaf"></div><div class="marigold"></div>`;
+                toranamContainer.appendChild(dec);
+            }
+        });
+    </script>
+</body>
+</html>
